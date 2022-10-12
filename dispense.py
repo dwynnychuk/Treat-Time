@@ -5,18 +5,24 @@ import time
 
 
 LED = 18
+SERVO = 32
 # set mode for pin numbering
 # testing with LED
 GPIO.setmode(GPIO.BOARD)
 
 GPIO.setup(LED, GPIO.OUT)
+GPIO.setup(SERVO, GPIO.OUT)
 
-for i in range(30):
+servoOutput = GPIO.PWM(SERVO,50)
+servoOutput.start(0)
+
+for i in range(13):
     GPIO.output(LED, GPIO.HIGH)
-    time.sleep(0.05)
+    servoOutput.ChangeDutyCycle(i)
     GPIO.output(LED, GPIO.LOW)
-    time.sleep(0.2)
+    time.sleep(1)
 
 
+servoOutput.stop()
 # End of Script Cleanup
 GPIO.cleanup()
