@@ -16,11 +16,11 @@ GPIO.setup(SERVO, GPIO.OUT)
 servoOutput = GPIO.PWM(SERVO,50)
 servoOutput.start(0)
 
-for i in range(13):
+for i in range(12):
     GPIO.output(LED, GPIO.HIGH)
     servoOutput.ChangeDutyCycle(i)
     GPIO.output(LED, GPIO.LOW)
-    time.sleep(1)
+    time.sleep(0.5)
 
 
 servoOutput.stop()
