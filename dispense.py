@@ -4,8 +4,23 @@ import RPi.GPIO as GPIO
 import time
 
 
-LED = 18
-SERVO = 32
+def openDispenser():
+    ledPin = 18
+    servoPin = 32
+    servoFreq = 50
+    servoStart = 0
+    
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(ledPin, GPIO.OUT)
+    GPIO.setup(servoPin, GPIO.OUT)
+
+    servoOutput = GPIO.PWM(servoPin,servoFreq)
+    servoOutput.start(servoStart)
+    GPIO.output(ledPin, GPIO.HIGH)
+
+def closeDispenser():
+    # comment
+
 # set mode for pin numbering
 # testing with LED
 GPIO.setmode(GPIO.BOARD)
