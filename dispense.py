@@ -4,11 +4,8 @@ import RPi.GPIO as GPIO
 import time
 
 
-def openDispenser():
+def openDispenser(servoPin, servoFreq, servoStart):
     ledPin = 18
-    servoPin = 32
-    servoFreq = 50
-    servoStart = 0
     
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(ledPin, GPIO.OUT)
@@ -16,28 +13,25 @@ def openDispenser():
 
     servoOutput = GPIO.PWM(servoPin,servoFreq)
     servoOutput.start(servoStart)
+    servoOutput.ChangeDutyCycle(servoStart+2)
     GPIO.output(ledPin, GPIO.HIGH)
+    time.sleep(1)
+    servoOutput.ChangeDutyCycle(servoStart+10)
+    GPIO.output(ledPin, GPIO.LOW)
+    time.sleep(1)
+    servoOutput.stop()
 
-def closeDispenser():
-    # comment
+def closeDispenser(servoPin, servoFreq, servoStop):
+    ledPin = 18
 
-# set mode for pin numbering
-# testing with LED
-GPIO.setmode(GPIO.BOARD)
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(ledPin, GPIO.OUT)
+    GPIO.setup(servoPin, GPIO.OUT)
 
-GPIO.setup(LED, GPIO.OUT)
-GPIO.setup(SERVO, GPIO.OUT)
+    servoOutput = GPIO.PWM(servoPin,servoFreq)
+    servoOutput.start(servoStop)
+    servoOutput.ChangeDutyCycle(servoStop-5)
+    GPIO.output(ledPin, GPIO.LOW)
+    servoOutput.stop()
 
-servoOutput = GPIO.PWM(SERVO,50)
-servoOutput.start(0)
-
-for i in range(12):
-    GPIO.output(LED, GPIO.HIGH)
-    servoOutput.ChangeDutyCycle(i)
-    GPIO.output(LED, GPIO.LOW)
-    time.sleep(0.5)
-
-
-servoOutput.stop()
-# End of Script Cleanup
-GPIO.cleanup()
+    
