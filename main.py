@@ -7,8 +7,8 @@ servoFreq = 50
 servoStart = 0
 servoStop = 12
 
-servoOutput = dispense.openDispenser(servoPin, servoFreq, servoStart)
-dispense.closeDispenser(servoPin, servoFreq, servoStop, servoOutput)
+dispense.openDispenser(servoPin, servoFreq, servoStart)
+dispense.closeDispenser(servoPin, servoFreq, servoStop)
 GPIO.cleanup()
 
 
