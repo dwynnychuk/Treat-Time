@@ -6,7 +6,7 @@ import os
 
 # initiate directory for saving files
 currentDirectory = os.getcwd()
-saveDir = currentDirectory + "/images"
+saveDir = currentDirectory + "/images/"
 print(saveDir)
 
 # initiate camera
@@ -15,14 +15,15 @@ cam = cv2.VideoCapture(0)
 # capture and save image
 ret, image = cam.read()
 timeNow = str(datetime.now())
-cv2.imshow('Test',image)
-cv2.waitKey(1000)
+imDir = saveDir + timeNow + ".jpg"
+
 time.sleep(1)
-cv2.imwrite(saveDir+timeNow, image)
-print("check dir")
-#    k = cv2.waitKey(1)
-#    if k != -1:
-#        break
+cv2.imwrite(imDir, image)
+
+cv2.imread(imDir)
+img = cv2.imread(imDir)
+cv2.imshow("image",img)
+cv2.waitKey(4000)
 
 cam.release()
 cv2.destroyAllWindows()
