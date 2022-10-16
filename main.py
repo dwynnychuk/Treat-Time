@@ -9,7 +9,7 @@ servoStart = 0
 servoStop = 12
 travelTime = 1
 
-num = EmailRead.readEmails()
+#num = EmailRead.readEmails()
 
 dispense.openDispenser(servoPin, servoFreq, servoStart, travelTime)
 dispense.closeDispenser(servoPin, servoFreq, servoStop, travelTime)
