@@ -14,7 +14,7 @@ cam = cv2.VideoCapture(0)
 
 # capture and save image
 ret, image = cam.read()
-timeNow = str(datetime.now())
+timeNow = str(datetime.now().resolution(microseconds=1))
 imDir = saveDir + timeNow + ".jpg"
 
 time.sleep(1)
