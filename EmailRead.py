@@ -70,5 +70,5 @@ def readEmails():
                                 pass                            
     except Exception as error:
         print(f'An error occurred: {error}')
-numMessages = readEmails()
-print(numMessages)
+# numMessages = readEmails()
+# print(numMessages)
