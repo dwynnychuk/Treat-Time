@@ -13,6 +13,7 @@ servoStart = 0
 servoStop = 12
 ledPin = 18
 travelTime = 1
+dispTime = 5
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(ledPin, GPIO.OUT)
@@ -30,23 +31,18 @@ while numNow <= numInitial:
     print(numNow)
 
 
-print("New Email Alert")
-for i in range(50):
+print("\n\nNew Email Alert!!!\n\n")
+for i in range(10):
     GPIO.output(ledPin, GPIO.HIGH)
-    time.sleep(0.2)
+    time.sleep(0.1)
     GPIO.output(ledPin, GPIO.LOW)
-    time.sleep(0.2)
+    time.sleep(0.1)
 
-
-
-
-#dispense.openDispenser(servoPin, servoFreq, servoStart, travelTime)
-#dispense.closeDispenser(servoPin, servoFreq, servoStop, travelTime)
-
-# # # capturing and saving image
-#p = Capture()
-#l = Capture().display(4)
-
+GPIO.cleanup()
+dispense.openDispenser(servoPin, servoFreq, servoStart, travelTime)
+dispense.closeDispenser(servoPin, servoFreq, servoStart, travelTime)
+p = Capture()
+l = Capture.display(p, dispTime)
 
 # # # end of script cleanup
 GPIO.cleanup()

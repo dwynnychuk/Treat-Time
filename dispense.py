@@ -13,7 +13,7 @@ def openDispenser(servoPin, servoFreq, servoStart, travelTime):
 
     servoOutput = GPIO.PWM(servoPin,servoFreq)
     servoOutput.start(servoStart)
-    servoOutput.ChangeDutyCycle(servoStart+2)
+    servoOutput.ChangeDutyCycle(servoStart)
     GPIO.output(ledPin, GPIO.HIGH)
     time.sleep(travelTime)
     servoOutput.stop()
@@ -25,7 +25,7 @@ def closeDispenser(servoPin, servoFreq, servoStop, travelTime):
     GPIO.output(ledPin, GPIO.LOW)
     servoOutput = GPIO.PWM(servoPin,servoFreq)
     servoOutput.start(0)
-    servoOutput.ChangeDutyCycle(servoStop-1)
+    servoOutput.ChangeDutyCycle(servoStop)
     time.sleep(travelTime)
     servoOutput.stop()
     

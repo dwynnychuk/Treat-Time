@@ -10,7 +10,7 @@ class Capture:
         cv2.imwrite(self.dir, self.image)
         cam.release()
 
-    def display(self,dispTime):
+    def display(self, dispTime):
         import cv2
         self.img = cv2.imread(self.dir)
         cv2.imshow("Image",self.img)
