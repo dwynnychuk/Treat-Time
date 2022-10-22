@@ -1,8 +1,8 @@
 # # # IMPORTING
-import RPi.GPIO as GPIO
-import dispense
+#import RPi.GPIO as GPIO
+#import dispense
 import EmailRead
-from capture import Capture
+#from capture import Capture
 
 
 # # # INITIALIZATIONS
