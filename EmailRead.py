@@ -44,7 +44,7 @@ def readEmails():
         results = service.users().messages().list(userId='me', labelIds=['INBOX'], q="is:unread").execute()
         messages = results.get('messages',[]);
         # print(len(messages))
-        # return len(messages)
+        return len(messages)
         if not messages:
             print('No new messages.')
         else:

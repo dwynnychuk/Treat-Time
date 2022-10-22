@@ -1,8 +1,8 @@
 # # # IMPORTING
-#import RPi.GPIO as GPIO
-#import dispense
+import RPi.GPIO as GPIO
+import dispense
 import EmailRead
-#from capture import Capture
+from capture import Capture
 
 
 # # # INITIALIZATIONS
@@ -13,6 +13,7 @@ servoStop = 12
 travelTime = 1
 
 num = EmailRead.readEmails()
+print(num)
 
 #dispense.openDispenser(servoPin, servoFreq, servoStart, travelTime)
 #dispense.closeDispenser(servoPin, servoFreq, servoStop, travelTime)
