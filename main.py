@@ -14,31 +14,23 @@ servoStop = 12
 ledPin = 18
 travelTime = 1
 dispTime = 5
-
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(ledPin, GPIO.OUT)
+blinkTime = 0.1
 
 # test loop for dispensing based on number
 numInitial = EmailRead.readEmails()
 
 numNow = numInitial
 
-while numNow <= numInitial:
-    numNow = EmailRead.readEmails()
-    GPIO.output(ledPin, GPIO.HIGH)
-    time.sleep(1)
-    GPIO.output(ledPin, GPIO.LOW)
-    print(numNow)
+#while numNow <= numInitial:
+#    numNow = EmailRead.readEmails()
+#    print(numNow)
 
 
 print("\n\nNew Email Alert!!!\n\n")
-for i in range(10):
-    GPIO.output(ledPin, GPIO.HIGH)
-    time.sleep(0.1)
-    GPIO.output(ledPin, GPIO.LOW)
-    time.sleep(0.1)
+#for i in range(10):
+#    dispense.blink(ledPin, blinkTime)
+#    time.sleep(blinkTime)
 
-GPIO.cleanup()
 dispense.openDispenser(servoPin, servoFreq, servoStart, travelTime)
 dispense.closeDispenser(servoPin, servoFreq, servoStart, travelTime)
 p = Capture()
