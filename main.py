@@ -5,6 +5,14 @@ import EmailRead
 import time
 from capture import Capture
 
+# Next to do
+# read email of sender
+# send sender an email
+# attach image to email
+# bash script for continuous operation
+# enclosure and cleanup
+
+
 # # # SERVO INFORMATION
 # Servo frequency is 50Hz
 # 0DEGREE is DS of 2
@@ -31,7 +39,7 @@ while numNow <= numInitial:
 
 
 print("\n\nNew Email Alert!!!\n\n")
-for i in range(10):
+for i in range(5):
     dispense.blink(ledPin, blinkOnTime, blinkOffTime)
 
 dispense.Dispenser(servoPin, servoFreq, servoStart, servoStop, travelTime)
