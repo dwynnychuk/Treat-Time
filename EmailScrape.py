@@ -54,8 +54,12 @@ def scrapeSender():
     txt = service.users().messages().get(userId="me", id=msg['id']).execute()
     payload = txt['payload']
     headers = payload['headers']
-    print(headers)
-    return len(messages)
+
+    for h in headers:
+        if h['name'] == 'From':
+            sender = h['value']
+    print(sender)
+    quit()
     if not messages:
         print('No new messages.')
     else:
