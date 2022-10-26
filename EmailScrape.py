@@ -58,31 +58,11 @@ def scrapeSender():
     for h in headers:
         if h['name'] == 'From':
             sender = h['value']
+        if h['name'] == 'Subject':
+            subject = h['value']
+            
     print(sender)
-    quit()
-    if not messages:
-        print('No new messages.')
-    else:
-        message_count = 0
-        for message in messages:
-            msg = service.users().messages().get(userId='me', id=message['id']).execute()                
-            email_data = msg['payload']['headers']
-            for values in email_data:
-                name = values['name']
-                if name == 'From':
-                    from_name= values['value']                
-                    for part in msg['payload']['parts']:
-                        try:
-                            data = part['body']["data"]
-                            byte_code = base64.urlsafe_b64decode(data)
-
-                            text = byte_code.decode("utf-8")
-                            print ("This is the message: "+ str(text))
-
-                            # mark the message as read (optional)
-                            msg  = service.users().messages().modify(userId='me', id=message['id'], body={'removeLabelIds': ['UNREAD']}).execute()                                                       
-                        except BaseException as error:
-                            pass                            
-
+    print(subject)
+    
 # numMessages = readEmails()
 # print(numMessages)
