@@ -16,4 +16,5 @@ class Capture:
         cv2.imshow("Image",self.img)
         cv2.waitKey(dispTime*1000)
         cv2.destroyAllWindows()
+        print(self.dir)
 

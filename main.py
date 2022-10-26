@@ -44,9 +44,9 @@ blinkOffTime = 0.05
 # for i in range(5):
 #     dispense.blink(ledPin, blinkOnTime, blinkOffTime)
 
-# dispense.Dispenser(servoPin, servoFreq, servoStart, servoStop, travelTime)
-# treatIm = Capture()
-# Capture.display(treatIm, dispTime)
+#dispense.Dispenser(servoPin, servoFreq, servoStart, servoStop, travelTime)
+#treatIm = Capture()
+#Capture.display(treatIm, dispTime)
 
 # # # # end of script cleanup
 # GPIO.cleanup()
@@ -54,3 +54,5 @@ blinkOffTime = 0.05
 senderEmail, senderSubject = EmailScrape.scrapeSender()
 print(senderEmail)
 print(senderSubject)
+dra = EmailScrape.emailDraft(senderEmail, senderSubject,'/home/pi/Documents/Treat-Time/images/2022-10-26 13:58:59.017654.jpg')
+print(dra)

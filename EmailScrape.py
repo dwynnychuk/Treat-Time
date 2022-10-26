@@ -1,5 +1,6 @@
 # Scrape sender information of latest email
 
+from email import message_from_binary_file
 import mimetypes
 import os.path
 import base64
@@ -22,7 +23,7 @@ import json
 #pip google_auth_oauthlib
 #pip google.auth
 
-SCOPES = ['https://www.googleapis.com/auth/gmail.readonly','https://www.googleapis.com/auth/gmail.modify']
+SCOPES = ['https://www.googleapis.com/auth/gmail.modify']
 
 def scrapeSender():
     """Shows basic usage of the Gmail API.
@@ -107,4 +108,21 @@ def emailDraft(senderEmail, senderSubject, imPath):
     # Attachments
     type_subtype, _ = mimetypes.guess_type(imPath)
     maintype, subtype = type_subtype.split('/')
+    print(maintype)
+    print(subtype)
     
+    with open(imPath, 'rb') as fp:
+        attachment_data = fp.read()
+    message.add_attachment(attachment_data, maintype, subtype)
+
+    encodedMessage = base64.urlsafe_b64encode(message.as_bytes()).decode()
+
+    create_draft_request_body = {
+        'message': {
+            'raw': encodedMessage
+        }
+    }
+
+    draft = service.users().drafts().create(userId='me', body=create_draft_request_body).execute()
+    print(f'Draft id: {draft["id"]}\nDraft messsage: {draft["message"]}')
+    return draft
