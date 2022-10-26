@@ -1,10 +1,13 @@
 # Scrape sender information of latest email
 
+import mimetypes
 import os.path
 import base64
 from googleapiclient.discovery import build 
 from google_auth_oauthlib.flow import InstalledAppFlow 
 from google.auth.transport.requests import Request
+from email.message import EmailMessage
+
 
 from google.oauth2.credentials import Credentials
 import json
@@ -60,9 +63,48 @@ def scrapeSender():
             sender = h['value']
         if h['name'] == 'Subject':
             subject = h['value']
-            
-    print(sender)
-    print(subject)
+    return sender, subject
     
-# numMessages = readEmails()
-# print(numMessages)
+def emailDraft(senderEmail, senderSubject, imPath):
+    creds = None
+    # The file token.json stores the user's access and refresh tokens, and is
+    # created automatically when the authorization flow completes for the first
+    # time.
+    if os.path.exists('token.json'):
+        creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+    # If there are no (valid) credentials available, let the user log in.
+
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
+            creds = flow.run_local_server(port=0)
+        # Save the credentials for the next run
+        with open('token.json', 'w') as token:
+            token.write(creds.to_json())
+
+    # Call the Gmail API
+    service = build('gmail', 'v1', credentials=creds)
+
+    # Build message
+    message = EmailMessage()
+
+    # Headers
+    # look at references and in-reply-to headers
+    message['To'] = senderEmail
+    message['From'] = 'dylanpythontest@gmail.com'
+    message['Subject'] = senderSubject
+
+    # Content
+    message.set_content(
+        'Hi, '
+        'Thanks for sending me a treat. It was my favourite!'
+
+        'Love, Murphy'
+    )
+
+    # Attachments
+    type_subtype, _ = mimetypes.guess_type(imPath)
+    maintype, subtype = type_subtype.split('/')
+    

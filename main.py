@@ -51,4 +51,6 @@ blinkOffTime = 0.05
 # # # # end of script cleanup
 # GPIO.cleanup()
 
-EmailScrape.scrapeSender()
+senderEmail, senderSubject = EmailScrape.scrapeSender()
+print(senderEmail)
+print(senderSubject)
