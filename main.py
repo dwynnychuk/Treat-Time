@@ -2,10 +2,12 @@
 import RPi.GPIO as GPIO
 import dispense
 import EmailRead
+import EmailScrape
 import time
 from capture import Capture
 
 # Next to do
+# take starting from quickstart
 # read email of sender
 # send sender an email
 # attach image to email
@@ -30,23 +32,23 @@ blinkOnTime = 0.1
 blinkOffTime = 0.05
 
 # test loop for dispensing based on number
-numInitial = EmailRead.readEmails()
-numNow = numInitial
+# numInitial = EmailRead.readEmails()
+# numNow = numInitial
 
-while numNow <= numInitial:
-    numNow = EmailRead.readEmails()
-    print(numNow)
-
-
-print("\n\nNew Email Alert!!!\n\n")
-for i in range(5):
-    dispense.blink(ledPin, blinkOnTime, blinkOffTime)
-
-dispense.Dispenser(servoPin, servoFreq, servoStart, servoStop, travelTime)
-treatIm = Capture()
-Capture.display(treatIm, dispTime)
-
-# # # end of script cleanup
-GPIO.cleanup()
+# while numNow <= numInitial:
+#     numNow = EmailRead.readEmails()
+#     print(numNow)
 
 
+# print("\n\nNew Email Alert!!!\n\n")
+# for i in range(5):
+#     dispense.blink(ledPin, blinkOnTime, blinkOffTime)
+
+# dispense.Dispenser(servoPin, servoFreq, servoStart, servoStop, travelTime)
+# treatIm = Capture()
+# Capture.display(treatIm, dispTime)
+
+# # # # end of script cleanup
+# GPIO.cleanup()
+
+EmailScrape.scrapeSender()
