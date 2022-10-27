@@ -13,7 +13,8 @@ import requests
 #pip google-api-python-client
 #pip google_auth_oauthlib
 #pip google.auth
-SCOPES = ['https:mail.google.com/']
+SCOPES = ['https://mail.google.com/']
+
 #SCOPES = ['https://www.googleapis.com/auth/gmail.readonly','https://www.googleapis.com/auth/gmail.modify']
 
 def readEmails():

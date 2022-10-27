@@ -28,6 +28,7 @@ import google.auth
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
+SCOPES = ['https://mail.google.com/']
 
 def gmail_create_draft_with_attachment():
     """Create and insert a draft email with attachment.
