@@ -1,6 +1,8 @@
 # Scrape sender information of latest email
 
 from email import message_from_binary_file
+from email.mime.image import MIMEImage
+from email.mime.base import MIMEBase
 import mimetypes
 import os.path
 import base64
@@ -50,7 +52,7 @@ def scrapeSender():
 
     # Call the Gmail API
     service = build('gmail', 'v1', credentials=creds)
-    results = service.users().messages().list(userId='me').execute()
+    results = service.users().messages().list(userId='me', labelIds=['INBOX']).execute()
     messages = results.get('messages')
     print(len(messages))
 
@@ -100,13 +102,14 @@ def emailDraft(senderEmail, senderSubject, imPath):
 
     # Content
     message.set_content(
-        'Hi, '
-        'Thanks for sending me a treat. It was my favourite!'
+        'Hi,\n\n'
+        'Thanks for sending me a treat. It was my favourite!\n\n\n'
 
-        'Love, Murphy'
+        'WOOF, Murphy'
     )
 
     # Attachments
+    attachment_filename = 'MurphySaysHi.jpg'
     type_subtype, _ = mimetypes.guess_type(imPath)
     maintype, subtype = type_subtype.split('/')
     print(maintype)
@@ -119,11 +122,29 @@ def emailDraft(senderEmail, senderSubject, imPath):
     encodedMessage = base64.urlsafe_b64encode(message.as_bytes()).decode()
 
     create_draft_request_body = {
-        'message': {
-            'raw': encodedMessage
-        }
+        'raw': encodedMessage
     }
 
-    draft = service.users().drafts().create(userId='me', body=create_draft_request_body).execute()
-    print(f'Draft id: {draft["id"]}\nDraft messsage: {draft["message"]}')
-    return draft
+    send_message = (service.users().messages().send(userId='me', body=create_draft_request_body).execute())
+    #draft = service.users().drafts().create(userId='me', body=create_draft_request_body).execute()
+    #print(f'Draft id: {draft["id"]}\nDraft messsage: {draft["message"]}')
+    #return draft
+    print(f'Message Id: {send_message["id"]}')
+    return send_message
+    
+
+def buildFilePart(imPath):
+
+    content_type, encoding = mimetypes.guess_type(imPath)
+
+    main_type, sub_type = content_type.split('/', 1)
+    if main_type == "image":
+        with open(imPath, 'rb'):
+            msg = MIMEImage('r', _subtype=sub_type)
+    else:
+        with open(imPath, 'rb'):
+            msg = MIMEBase(main_type, sub_type)
+            msg.set_payload(imPath.read())
+    filename = os.path.basename(imPath)
+    msg.add_header('Content-Disposition', 'attachment', filename=filename)
+    return msg
