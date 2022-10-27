@@ -23,7 +23,7 @@ import json
 #pip google_auth_oauthlib
 #pip google.auth
 
-SCOPES = ['https://www.googleapis.com/auth/gmail.modify']
+SCOPES = ['https:mail.google.com/']
 
 def scrapeSender():
     """Shows basic usage of the Gmail API.

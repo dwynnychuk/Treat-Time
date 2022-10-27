@@ -1,5 +1,5 @@
 # # # IMPORTING
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import dispense
 import EmailRead
 import EmailScrape
