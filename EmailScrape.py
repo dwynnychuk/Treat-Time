@@ -53,8 +53,14 @@ def scrapeSender():
     # Call the Gmail API
     service = build('gmail', 'v1', credentials=creds)
     results = service.users().messages().list(userId='me', labelIds=['INBOX']).execute()
+    threadsList = service.users().threads().list(userId='me', labelIds=['INBOX']).execute()
     messages = results.get('messages')
+
+    # dealing with threads
+    for t in threadsList:
+        print(t['id'])
     print(len(messages))
+    print(thread)
 
     # grab latest email
     msg = messages[0]
