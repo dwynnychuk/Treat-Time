@@ -69,7 +69,7 @@ def scrapeSender():
             subject = h['value']
     return sender, subject
     
-def emailDraft(senderEmail, senderSubject, imPath):
+def emailSend(senderEmail, senderSubject, imPath):
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
@@ -133,18 +133,18 @@ def emailDraft(senderEmail, senderSubject, imPath):
     return send_message
     
 
-def buildFilePart(imPath):
+# def buildFilePart(imPath):
 
-    content_type, encoding = mimetypes.guess_type(imPath)
+#     content_type, encoding = mimetypes.guess_type(imPath)
 
-    main_type, sub_type = content_type.split('/', 1)
-    if main_type == "image":
-        with open(imPath, 'rb'):
-            msg = MIMEImage('r', _subtype=sub_type)
-    else:
-        with open(imPath, 'rb'):
-            msg = MIMEBase(main_type, sub_type)
-            msg.set_payload(imPath.read())
-    filename = os.path.basename(imPath)
-    msg.add_header('Content-Disposition', 'attachment', filename=filename)
-    return msg
+#     main_type, sub_type = content_type.split('/', 1)
+#     if main_type == "image":
+#         with open(imPath, 'rb'):
+#             msg = MIMEImage('r', _subtype=sub_type)
+#     else:
+#         with open(imPath, 'rb'):
+#             msg = MIMEBase(main_type, sub_type)
+#             msg.set_payload(imPath.read())
+#     filename = os.path.basename(imPath)
+#     msg.add_header('Content-Disposition', 'attachment', filename=filename)
+#     return msg
