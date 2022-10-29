@@ -29,23 +29,29 @@ dispTime = 5
 blinkOnTime = 0.1
 blinkOffTime = 0.05
 
-# test loop for dispensing based on number
-numInitial = EmailRead.readEmails()
-numNow = numInitial
+try:
+    while True:
+        # test loop for dispensing based on number
+        numInitial = EmailRead.readEmails()
+        numNow = numInitial
 
-while numNow <= numInitial:
-    numNow = EmailRead.readEmails()
+        while numNow <= numInitial:
+            numNow = EmailRead.readEmails()
 
-print("\n\nNew Email Alert!!!\n\n")
-for i in range(5):
-    dispense.blink(ledPin, blinkOnTime, blinkOffTime)
+        print("\nNew Email Alert!!!")
+        for i in range(5):
+            dispense.blink(ledPin, blinkOnTime, blinkOffTime)
 
-dispense.Dispenser(servoPin, servoFreq, servoStart, servoStop, travelTime)
-treatIm = Capture()
-imPath = Capture.display(treatIm, dispTime)
+        dispense.Dispenser(servoPin, servoFreq, servoStart, servoStop, travelTime)
+        treatIm = Capture()
+        imPath = Capture.display(treatIm, dispTime)
 
-# # # # end of script cleanup
-GPIO.cleanup()
+        # # # # end of script cleanup
+        GPIO.cleanup()
 
-senderEmail, senderSubject, threadId, messageId = EmailScrape.scrapeSender()
-sentMessage = EmailScrape.emailSend(senderEmail, senderSubject, imPath, threadId, messageId)
+        senderEmail, senderSubject, threadId, messageId = EmailScrape.scrapeSender()
+        sentMessage = EmailScrape.emailSend(senderEmail, senderSubject, imPath, threadId, messageId)
+except:
+    pass
+
+print('\n\nProgram Finshed!\n')

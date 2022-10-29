@@ -113,8 +113,6 @@ def emailSend(senderEmail, senderSubject, imPath, threadId, messageId):
     attachment_filename = 'MurphySaysHi.jpg'
     type_subtype, _ = mimetypes.guess_type(imPath)
     maintype, subtype = type_subtype.split('/')
-    print(maintype)
-    print(subtype)
     
     with open(imPath, 'rb') as fp:
         attachment_data = fp.read()
