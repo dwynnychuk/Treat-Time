@@ -15,12 +15,6 @@ from email.message import EmailMessage
 from google.oauth2.credentials import Credentials
 import json
 
-
-# import re
-# import time
-# import logging
-# import requests
-
 #pip google-api-python-client
 #pip google_auth_oauthlib
 #pip google.auth
@@ -58,7 +52,6 @@ def scrapeSender():
 
     # Extract Thread Information for latest email
     threadId = threadsList[0]['id']
-    historyId = threadsList[0]['historyId']
 
     # Extract Sender and Subject
     msg = messages[0]
@@ -71,10 +64,8 @@ def scrapeSender():
             sender = h['value']
         if h['name'] == 'Subject':
             subject = h['value']
-        #print(h['name'])
         if h['name'] == 'Message-Id':
             messageId = h['value']
-    print(messageId)
     return sender, subject, threadId, messageId
     
 def emailSend(senderEmail, senderSubject, imPath, threadId, messageId):
@@ -103,7 +94,6 @@ def emailSend(senderEmail, senderSubject, imPath, threadId, messageId):
     message = EmailMessage()
 
     # Headers
-    # look at references and in-reply-to headers
     message['To'] = senderEmail
     message['From'] = 'dylanpythontest@gmail.com'
     message['Subject'] = "Re: " + senderSubject
