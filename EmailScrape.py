@@ -57,10 +57,9 @@ def scrapeSender():
     messages = results.get('messages')
 
     # dealing with threads
-    for t in threadsList:
-        print(t['id'])
+    threads = threadsList['threads']
     print(len(messages))
-    print(thread)
+    print(threads[0])
 
     # grab latest email
     msg = messages[0]
