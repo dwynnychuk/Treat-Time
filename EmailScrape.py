@@ -53,15 +53,14 @@ def scrapeSender():
     # Call the Gmail API
     service = build('gmail', 'v1', credentials=creds)
     results = service.users().messages().list(userId='me', labelIds=['INBOX']).execute()
-    threadsList = service.users().threads().list(userId='me', labelIds=['INBOX']).execute()
+    threadsList = service.users().threads().list(userId='me', labelIds=['INBOX']).execute()['threads']
     messages = results.get('messages')
 
-    # dealing with threads
-    threads = threadsList['threads']
-    print(len(messages))
-    print(threads[0])
+    # Extract Thread Information for latest email
+    threadId = threadsList[0]['id']
+    historyId = threadsList[0]['historyId']
 
-    # grab latest email
+    # Extract Sender and Subject
     msg = messages[0]
     txt = service.users().messages().get(userId="me", id=msg['id']).execute()
     payload = txt['payload']
@@ -72,9 +71,13 @@ def scrapeSender():
             sender = h['value']
         if h['name'] == 'Subject':
             subject = h['value']
-    return sender, subject
+        #print(h['name'])
+        if h['name'] == 'Message-Id':
+            messageId = h['value']
+    print(messageId)
+    return sender, subject, threadId, messageId
     
-def emailSend(senderEmail, senderSubject, imPath):
+def emailSend(senderEmail, senderSubject, imPath, threadId, messageId):
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
@@ -103,7 +106,10 @@ def emailSend(senderEmail, senderSubject, imPath):
     # look at references and in-reply-to headers
     message['To'] = senderEmail
     message['From'] = 'dylanpythontest@gmail.com'
-    message['Subject'] = senderSubject
+    message['Subject'] = "Re: " + senderSubject
+    message['In-Reply-To'] = messageId
+    message['References'] = messageId
+    
 
     # Content
     message.set_content(
@@ -127,13 +133,11 @@ def emailSend(senderEmail, senderSubject, imPath):
     encodedMessage = base64.urlsafe_b64encode(message.as_bytes()).decode()
 
     create_draft_request_body = {
-        'raw': encodedMessage
+        'raw': encodedMessage,
+        'threadId': threadId
     }
 
     send_message = (service.users().messages().send(userId='me', body=create_draft_request_body).execute())
-    #draft = service.users().drafts().create(userId='me', body=create_draft_request_body).execute()
-    #print(f'Draft id: {draft["id"]}\nDraft messsage: {draft["message"]}')
-    #return draft
     print(f'Message Id: {send_message["id"]}')
     return send_message
     

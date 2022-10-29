@@ -51,7 +51,9 @@ blinkOffTime = 0.05
 # # # # end of script cleanup
 # GPIO.cleanup()
 
-senderEmail, senderSubject = EmailScrape.scrapeSender()
+senderEmail, senderSubject, threadId, messageId = EmailScrape.scrapeSender()
 print(senderEmail)
 print(senderSubject)
-#dra = EmailScrape.emailSend(senderEmail, senderSubject,'/home/pi/Documents/Treat-Time/images/2022-10-26 13:58:59.017654.jpg')
+print(threadId)
+print(messageId)
+dra = EmailScrape.emailSend(senderEmail, senderSubject,'/home/pi/Documents/Treat-Time/images/2022-10-26 13:58:59.017654.jpg', threadId, messageId)
