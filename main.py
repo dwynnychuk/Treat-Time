@@ -8,7 +8,6 @@ from capture import Capture
 
 # Next to do
 # take starting from quickstart
-# attach image to email
 # bash script for continuous operation
 # enclosure and cleanup
 
