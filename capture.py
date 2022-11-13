@@ -13,8 +13,8 @@ class Capture:
     def display(self, dispTime):
         import cv2
         self.img = cv2.imread(self.dir)
-        cv2.imshow("Image",self.img)
-        cv2.waitKey(dispTime*1000)
-        cv2.destroyAllWindows()
+        #cv2.imshow("Image",self.img)
+        #cv2.waitKey(dispTime*1000)
+        #cv2.destroyAllWindows()
         return self.dir
 
