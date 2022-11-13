@@ -38,8 +38,8 @@ try:
             numNow = EmailRead.readEmails()
 
         print("\nNew Email Alert!!!")
-        for i in range(5):
-            dispense.blink(ledPin, blinkOnTime, blinkOffTime)
+        #for i in range(5):
+        #    dispense.blink(ledPin, blinkOnTime, blinkOffTime)
 
         dispense.Dispenser(servoPin, servoFreq, servoStart, servoStop, travelTime)
         treatIm = Capture()
