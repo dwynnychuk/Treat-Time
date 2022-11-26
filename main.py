@@ -41,7 +41,7 @@ try:
         #for i in range(5):
         #    dispense.blink(ledPin, blinkOnTime, blinkOffTime)
 
-        #dispense.Dispenser(servoPin, servoFreq, servoStart, servoStop, travelTime)
+        dispense.Dispenser(servoPin, servoFreq, servoStart, servoStop, travelTime)
         treatIm = Capture()
         imPath = Capture.display(treatIm, dispTime)
 
