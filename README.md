@@ -20,3 +20,5 @@ LED command (18) - optional
 
 # Image
 ![ISO-Treat](https://user-images.githubusercontent.com/92692830/200192450-0a911578-1681-4d07-85ab-2050a7216652.png)
+![Email](https://github.com/dwynnychuk/Treat-Time/assets/92692830/d5f8b707-2c38-49ce-9ac1-cf6ccf5e61df)
+<img width="621" alt="CageAssembly" src="https://github.com/dwynnychuk/Treat-Time/assets/92692830/b17e662b-4f73-4a47-9c1e-ae7282e93283">
