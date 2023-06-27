@@ -12,7 +12,7 @@ Raspberry Pi 3B+<br />
 Logitech C270 webcam<br />
 Tower Pro Arduino Servo (Hitec HS-65HB fits as an upgraded servo)<br />
 On/Off switch for USB power <br />
-Custom 3d Printed enclosure (files here https://grabcad.com/library/automated-treat-dispenser-1)
+Custom 3d Printed enclosure
 
 # Pinout
 Servo commmand (32)<br />
